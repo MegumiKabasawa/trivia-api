@@ -4,6 +4,11 @@ module.exports = async function(context, req) {
   context.log("Request for all questions");
 
   context.res = {
-    body: questions.slice(0, 5)
+    body: questions(p=>{
+      return{
+        questions: p.questions,
+        answers: q.incorrect_answers.concat([q.correct_answer]).sort()
+      }
+    })
   };
 };
